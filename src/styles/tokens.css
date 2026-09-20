@@ -1,0 +1,19 @@
+:root {
+  --cream: #f7f3e9;
+  --paper: #fffdf8;
+  --ink: #202520;
+  --muted: #62665e;
+  --blue: #456bdd;
+  --blue-light: #dfe8f4;
+  --yellow: #f5cb55;
+  --yellow-light: #f6e7b4;
+  --red: #df715a;
+  --red-light: #f4ddd2;
+  --green: #78a981;
+  --green-light: #dee8d7;
+  --line: #d7d8cb;
+  --sans: "Space Grotesk Variable", sans-serif;
+  --serif: "Literata Variable", Georgia, serif;
+  --width: 1160px;
+  --radius: 16px;
+}

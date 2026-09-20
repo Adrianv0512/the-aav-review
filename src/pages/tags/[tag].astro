@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import TagPill from "../../components/TagPill.astro";
+import { getPosts, allTags } from "../../utils/posts";
+import { url, tagSlug } from "../../utils/urls";
+export async function getStaticPaths() {
+  return allTags(await getPosts()).map((tag) => ({
+    params: { tag: tagSlug(tag) },
+    props: { tag },
+  }));
+}
+const { tag } = Astro.props;
+const allPosts = await getPosts();
+const posts = allPosts.filter((post) => post.data.tags.includes(tag));
+---
+
+<BaseLayout
+  title={tag}
+  description={`Writing about ${tag.toLowerCase()} from Adrian’s Notebook.`}
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">A thread in the notebook</p>
+      <h1>
+        {tag}
+        <span style="color:var(--blue)">.</span>
+      </h1>
+      <p class="lead">
+        A few thoughts on {tag.toLowerCase()}. Always room for another
+        perspective.
+      </p>
+    </header>
+    <nav class="archive-filters tag-list" aria-label="Filter writing by topic">
+      <a class="tag-pill" href={url("writing/")}>
+        Everything
+      </a>
+      {allTags(allPosts).map((item) => (
+        <TagPill tag={item} active={item === tag} />
+      ))}
+    </nav>
+    <p class="entry-count">
+      {posts.length} {posts.length === 1 ? "entry" : "entries"} · Newest first
+    </p>
+    <div class="post-grid">
+      {posts.map((post, index) => (
+        <PostCard post={post} index={index} headingLevel="h2" />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

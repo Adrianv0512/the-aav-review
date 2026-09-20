@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Doodle from "../components/Doodle.astro";
+import { url } from "../utils/urls";
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="wrap lost">
+    <Doodle name="loose-page" />
+    <p class="eyebrow">404 · A missing page</p>
+    <h1>This page wandered off.</h1>
+    <p>
+      Even a tidy notebook loses a page sometimes.
+      <br />
+      Let’s get you back to something worth reading.
+    </p>
+    <a class="button" href={url()}>
+      Back to the notebook <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+</BaseLayout>
+<style>
+  .lost {
+    text-align: center;
+    padding: 35px 0 55px;
+  }
+  .lost :global(.doodle) {
+    width: 240px;
+    margin: 0 auto 20px;
+  }
+  .lost h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    margin-bottom: 25px;
+  }
+  .lost > p:not(.eyebrow) {
+    color: var(--muted);
+    margin-bottom: 30px;
+  }
+</style>

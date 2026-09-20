@@ -1,0 +1,18 @@
+---
+import { url } from "../utils/urls";
+interface Props {
+  name?: string;
+  class?: string;
+}
+const { name = "notebook", class: className = "" } = Astro.props;
+---
+
+<img
+  class:list={["doodle", className]}
+  src={url(`illustrations/${name}.svg`)}
+  width={name === "hero-notebook" ? 440 : 320}
+  height={name === "hero-notebook" ? 390 : 260}
+  fetchpriority={name === "hero-notebook" ? "high" : undefined}
+  alt=""
+  aria-hidden="true"
+/>

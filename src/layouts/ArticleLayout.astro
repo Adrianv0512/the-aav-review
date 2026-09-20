@@ -1,0 +1,102 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import TagPill from "../components/TagPill.astro";
+import { type Post, getPosts, formatDate, readingTime } from "../utils/posts";
+import { settings } from "../settings";
+import { url } from "../utils/urls";
+import "../styles/article.css";
+interface Props {
+  post: Post;
+}
+const { post } = Astro.props;
+const { data } = post;
+const related = (await getPosts())
+  .filter((p) => p.id !== post.id)
+  .sort(
+    (a, b) =>
+      b.data.tags.filter((tag) => data.tags.includes(tag)).length -
+      a.data.tags.filter((tag) => data.tags.includes(tag)).length,
+  )
+  .slice(0, 3);
+---
+
+<BaseLayout {...data}>
+  <article class:list={["article-page", `accent-${data.accent}`]}>
+    <header class="article-header">
+      <a class="back-link" href={url("writing/")}>
+        ← Back to the notebook
+      </a>
+      <div class="tag-list">
+        {data.tags.map((tag) => (
+          <TagPill tag={tag} />
+        ))}
+      </div>
+      <h1>{data.title}</h1>
+      <p class="article-description">{data.description}</p>
+      <div class="article-byline">
+        <span>By {data.author || settings.author}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={data.publishedDate.toISOString()}>
+          {formatDate(data.publishedDate)}
+        </time>
+        <span aria-hidden="true">·</span>
+        <span>{readingTime(post.body)}</span>
+      </div>
+      {data.updatedDate && (
+        <p class="updated-date">
+          Updated{" "}
+          <time datetime={data.updatedDate.toISOString()}>
+            {formatDate(data.updatedDate)}
+          </time>
+        </p>
+      )}
+      {data.illustration && (
+        <div class="article-illustration">
+          <img
+            src={url(data.illustration)}
+            width="320"
+            height="260"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+      )}
+    </header>
+    <div class="article-body">
+      {data.demo && (
+        <aside class="demo-note">
+          Sample entry — this is replaceable demo content, included to show how
+          the notebook reads.
+        </aside>
+      )}
+      <slot />
+    </div>
+    <footer class="article-end">
+      <p class="eyebrow">Filed under</p>
+      <div class="tag-list">
+        {data.tags.map((tag) => (
+          <TagPill tag={tag} />
+        ))}
+      </div>
+      <p class="end-mark" aria-hidden="true">
+        ✳
+      </p>
+    </footer>
+  </article>
+  {related.length > 0 && (
+    <section class="wrap related">
+      <div class="section-heading">
+        <h2>More from the notebook</h2>
+        <a class="text-link" href={url("writing/")}>
+          All writing ↗
+        </a>
+      </div>
+      <div class="post-grid">
+        {related.map((item, index) => (
+          <PostCard post={item} index={index} />
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

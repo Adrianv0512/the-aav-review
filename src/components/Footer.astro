@@ -1,0 +1,23 @@
+---
+import { settings } from "../settings";
+import { url } from "../utils/urls";
+---
+
+<footer class="site-footer wrap">
+  <div>
+    <a class="footer-brand" href={url()}>
+      Adrian’s Notebook.
+    </a>
+    <p>A little curiosity goes a long way.</p>
+  </div>
+  <div class="footer-links">
+    <a href={url("writing/")}>Writing</a>
+    <a href={url("about/")}>About</a>
+    <a href={url("rss.xml")}>RSS ↗</a>
+    <a href={settings.github}>GitHub ↗</a>
+  </div>
+  <p class="copyright">
+    © {new Date().getFullYear()} {settings.author}
+    <span>Written by a person. Read at your own pace.</span>
+  </p>
+</footer>

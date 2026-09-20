@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import TagPill from "../../components/TagPill.astro";
+import { getPosts, allTags } from "../../utils/posts";
+import { url } from "../../utils/urls";
+const posts = await getPosts();
+---
+
+<BaseLayout
+  title="All writing"
+  description="Notes, essays, and unfinished questions from Adrian’s Notebook."
+>
+  <div class="wrap">
+    <header class="page-intro">
+      <p class="eyebrow">The collected scribbles</p>
+      <h1>
+        All writing<span class="blue-dot">.</span>
+      </h1>
+      <p class="lead">
+        A place for ideas that need a little more room.
+        <br />
+        Browse the notebook, or follow a thread.
+      </p>
+    </header>
+    <nav class="archive-filters tag-list" aria-label="Filter writing by topic">
+      <a class="tag-pill active" href={url("writing/")} aria-current="page">
+        Everything
+      </a>
+      {allTags(posts).map((tag) => (
+        <TagPill tag={tag} />
+      ))}
+    </nav>
+    <p class="entry-count">
+      {posts.length} {posts.length === 1 ? "entry" : "entries"} · Newest first
+    </p>
+    {posts.length ? (
+      <div class="post-grid">
+        {posts.map((post, index) => (
+          <PostCard post={post} index={index} headingLevel="h2" />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">The notebook is open. First entry coming soon.</p>
+    )}
+  </div>
+</BaseLayout>
+<style>
+  .blue-dot {
+    color: var(--blue);
+  }
+</style>

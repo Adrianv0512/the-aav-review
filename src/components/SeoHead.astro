@@ -1,0 +1,69 @@
+---
+import { settings } from "../settings";
+import { url } from "../utils/urls";
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+  socialImage?: string;
+  publishedDate?: Date;
+  updatedDate?: Date;
+  noindex?: boolean;
+}
+const {
+  title,
+  description = settings.description,
+  canonicalURL,
+  socialImage,
+  publishedDate,
+  updatedDate,
+  noindex = false,
+} = Astro.props;
+const fullTitle = title ? `${title} · ${settings.title}` : settings.title;
+const canonical = canonicalURL || new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#f7f3e9" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content={settings.author} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" type="image/svg+xml" href={url("favicon.svg")} />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={settings.title}
+  href={url("rss.xml")}
+/>
+<meta property="og:title" content={title || settings.title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={publishedDate ? "article" : "website"} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={settings.title} />
+<meta
+  name="twitter:card"
+  content={socialImage ? "summary_large_image" : "summary"}
+/>
+{socialImage && (
+  <meta
+    property="og:image"
+    content={
+      new URL(
+        socialImage.startsWith("http") ? socialImage : url(socialImage),
+        Astro.site,
+      ).href
+    }
+  />
+)}
+{publishedDate && (
+  <meta
+    property="article:published_time"
+    content={publishedDate.toISOString()}
+  />
+)}
+{updatedDate && (
+  <meta property="article:modified_time" content={updatedDate.toISOString()} />
+)}
+{noindex && <meta name="robots" content="noindex" />}

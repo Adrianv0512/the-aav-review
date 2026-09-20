@@ -1,0 +1,50 @@
+---
+import type { Post } from "../utils/posts";
+import { readingTime, formatDate } from "../utils/posts";
+import { url } from "../utils/urls";
+interface Props {
+  post: Post;
+  index?: number;
+  headingLevel?: "h2" | "h3";
+}
+const { post, index = 0, headingLevel: Heading = "h3" } = Astro.props;
+const { data } = post;
+---
+
+<article class:list={["post-card", `accent-${data.accent}`]}>
+  <a class="card-link" href={url(`writing/${post.id}/`)}>
+    <div class="card-art">
+      <span class="card-category">{data.tags[0]}</span>
+      {data.illustration && (
+        <img
+          src={url(data.illustration)}
+          width="320"
+          height="260"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
+      )}
+      <span class="card-number" aria-hidden="true">
+        0{index + 1}
+      </span>
+    </div>
+    <div class="card-copy">
+      <div class="post-meta">
+        <time datetime={data.publishedDate.toISOString()}>
+          {formatDate(data.publishedDate)}
+        </time>
+        <span>·</span>
+        <span>{readingTime(post.body)}</span>
+      </div>
+      <Heading class="card-title">{data.title}</Heading>
+      <p>{data.description}</p>
+      <div class="card-bottom">
+        <span>{data.demo ? "Sample entry" : "Read the entry"}</span>
+        <span class="circle-arrow" aria-hidden="true">
+          ↗
+        </span>
+      </div>
+    </div>
+  </a>
+</article>

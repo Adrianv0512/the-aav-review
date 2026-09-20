@@ -1,0 +1,16 @@
+---
+import { tagSlug, url } from "../utils/urls";
+interface Props {
+  tag: string;
+  active?: boolean;
+}
+const { tag, active = false } = Astro.props;
+---
+
+<a
+  class:list={["tag-pill", { active }]}
+  href={url(`tags/${tagSlug(tag)}/`)}
+  aria-current={active ? "page" : undefined}
+>
+  {tag}
+</a>
