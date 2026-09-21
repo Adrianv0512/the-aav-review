@@ -1,5 +1,5 @@
 export const settings = {
-  title: "The AAV Review",
+  title: "The Ascent Report",
   description:
     "Independent student opinion and analysis on politics, public policy, technology, and culture. By Adrian Vargas.",
   author: "Adrian Vargas",

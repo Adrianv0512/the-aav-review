@@ -86,7 +86,7 @@ async function exchangeCode(
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "User-Agent": "the-aav-review-cms-auth",
+      "User-Agent": "the-ascent-report-cms-auth",
     },
     body: JSON.stringify({
       client_id: env.GITHUB_OAUTH_ID,
@@ -116,10 +116,10 @@ function callbackResponse(token: string, env: Env): Response {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Authorizing The AAV Review</title>
+    <title>Authorizing The Ascent Report</title>
   </head>
   <body>
-    <p>Authorizing The AAV Review editor…</p>
+    <p>Authorizing The Ascent Report editor…</p>
     <script nonce="${nonce}">
       const cmsOrigin = ${cmsOrigin};
       const payload = ${payload};
@@ -188,7 +188,7 @@ export default {
     const pathname = new URL(request.url).pathname;
     if (pathname === "/auth") return handleAuth(request, env);
     if (pathname === "/callback") return handleCallback(request, env);
-    if (pathname === "/") return textResponse("The AAV Review CMS OAuth proxy is running.", 200);
+    if (pathname === "/") return textResponse("The Ascent Report CMS OAuth proxy is running.", 200);
     return textResponse("Not found.", 404);
   },
 } satisfies ExportedHandler<Env>;

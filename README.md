@@ -1,4 +1,4 @@
-# The AAV Review
+# The Ascent Report
 
 A lightweight, static editorial blog built with Astro, TypeScript, Markdown, and plain CSS. Restrained editorial topic icons, self-hosted Space Grotesk and Literata fonts, no analytics, no database, and no browser JavaScript required for navigation or reading.
 
@@ -108,7 +108,7 @@ One-time owner setup:
 
 1. From `oauth-worker/`, run `npm install`, then `npx wrangler login` and approve Cloudflare access.
 2. Run `npm run deploy`. The deployed Worker for this project is `https://the-aav-review-cms-auth.the-aav-review-cms-auth.workers.dev`. A new Cloudflare account must register its `workers.dev` subdomain once before that URL becomes reachable.
-3. In GitHub **Settings → Developer settings → OAuth Apps**, create **The AAV Review CMS**. Use the public site as its homepage and `<worker-url>/callback` as its exact authorization callback URL.
+3. In GitHub **Settings → Developer settings → OAuth Apps**, create **The Ascent Report CMS**. Use the public site as its homepage and `<worker-url>/callback` as its exact authorization callback URL.
 4. In `oauth-worker/`, store the app credentials with `npx wrangler secret put GITHUB_OAUTH_ID` and `npx wrangler secret put GITHUB_OAUTH_SECRET`, then deploy again. These values live only in Cloudflare's encrypted secret storage.
 5. Confirm `backend.base_url` in `public/admin/config.yml` matches the Worker URL, commit, and push.
 6. Visit the production admin URL and test login, creating/editing/deleting a temporary draft, and publishing only after its content is ready.
@@ -182,4 +182,4 @@ No cookies, tracking, forms, accounts, comments, or third-party font requests. I
 
 ## Publication branding
 
-The publication name is The AAV Review. The supplied mountain logo is stored unchanged at `public/brand/mountain-logo.jpg`; the header uses a clipped display of its surrounding white space. It also serves as the browser icon. The original AAV News banner is not used because it carries the previous name. The repository is named `the-aav-review` to provide the branded GitHub Pages path.
+The publication name is The Ascent Report. The supplied mountain logo is stored unchanged at `public/brand/mountain-logo.jpg`; the header uses a clipped display of its surrounding white space. It also serves as the browser icon. The original AAV News banner is not used because it carries the previous name. The repository and GitHub Pages project path still use the legacy `the-aav-review` identifier so existing links, CMS authentication, and deployment settings remain stable.
