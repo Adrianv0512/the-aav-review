@@ -1,4 +1,4 @@
-# Adrian’s Notebook
+# The AAV Review
 
 A lightweight, static editorial blog built with Astro, TypeScript, Markdown, and plain CSS. Restrained editorial topic icons, self-hosted Space Grotesk and Literata fonts, no analytics, no database, and no browser JavaScript required for navigation or reading.
 
@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open the URL printed by Astro, including `/aav_blog_site/`.
+Open the URL printed by Astro, including `/the-aav-review/`.
 
 ```sh
 npm run check    # Type-check Astro and TypeScript
@@ -21,7 +21,7 @@ npm run preview  # Serve the production build locally
 
 ## Write an article
 
-Copy `templates/article.md` to `src/content/blog/your-short-title.md`. The filename becomes `/aav_blog_site/writing/your-short-title/`. Use lowercase letters and hyphens for filenames.
+Copy `templates/article.md` to `src/content/blog/your-short-title.md`. The filename becomes `/the-aav-review/writing/your-short-title/`. Use lowercase letters and hyphens for filenames.
 
 ```yaml
 ---
@@ -44,7 +44,7 @@ Dates use `YYYY-MM-DD` and are displayed in UTC to avoid calendar-day shifts. Po
 
 **Drafts are hidden in development and production**, including their article URLs and tag pages. To preview a draft locally, temporarily change `draft` to `false`, then restore it before pushing. Future dates do not schedule publication; use `draft: true` until ready.
 
-Write ordinary Markdown: headings, lists, links, images, blockquotes, tables, fenced code blocks, and footnotes all work. For images in article Markdown, use relative imports from the Markdown file or the full project-prefixed public path, such as `/aav_blog_site/images/example.jpg`. Add descriptive alt text to meaningful images. Metadata illustration paths omit the project prefix; the site adds it automatically.
+Write ordinary Markdown: headings, lists, links, images, blockquotes, tables, fenced code blocks, and footnotes all work. For images in article Markdown, use relative imports from the Markdown file or the full project-prefixed public path, such as `/the-aav-review/images/example.jpg`. Add descriptive alt text to meaningful images. Metadata illustration paths omit the project prefix; the site adds it automatically.
 
 Use direct links to primary sources where possible. Separate factual claims from interpretation, identify uncertainty, and use `updatedDate` for material corrections.
 
@@ -54,7 +54,7 @@ Three published sample entries have `demo: true`, producing a visible sample lab
 
 ## Publish with GitHub Pages
 
-The site is configured for **https://adrianv0512.github.io/aav_blog_site/**.
+The site is configured for **https://adrianv0512.github.io/the-aav-review/**.
 
 1. In the repository’s **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
 2. Commit and push to `main`:
@@ -67,7 +67,7 @@ git push -u origin main
 
 3. Open the repository’s **Actions** tab. The **Deploy to GitHub Pages** workflow checks types, builds, uploads, and deploys the site. A failed build does not publish.
 
-The workflow uses the current [official Astro Pages deployment approach](https://docs.astro.build/en/guides/deploy/github/). The initial empty repository needs its first commit before the workflow can run. GitHub authentication with repository write access is needed to push; use your normal Git credential manager or SSH setup. Never store access tokens in this repository.
+The workflow uses the current [official Astro Pages deployment approach](https://docs.astro.build/en/guides/deploy/github/). GitHub authentication with repository write access is needed to push; use your normal Git credential manager or SSH setup. Never store access tokens in this repository.
 
 ## Site settings
 
@@ -97,8 +97,12 @@ Follow GitHub’s domain verification and DNS instructions. Change `site` in `as
 - `src/utils/`: content queries, dates, reading time, URLs
 - `.github/workflows/deploy.yml`: automatic deployment
 
-RSS lives at `/aav_blog_site/rss.xml`; the sitemap index is `/aav_blog_site/sitemap-index.xml`. The project-level robots file is generated for custom-domain readiness; on a GitHub project site, crawlers use the account host’s root robots file.
+RSS lives at `/the-aav-review/rss.xml`; the sitemap index is `/the-aav-review/sitemap-index.xml`. The project-level robots file is generated for custom-domain readiness; on a GitHub project site, crawlers use the account host’s root robots file.
 
 ## Privacy and future work
 
 No cookies, tracking, forms, accounts, comments, or third-party font requests. If analytics become useful, start with repository traffic insights or evaluate privacy-friendly services such as Plausible or Umami. Nothing is installed by default. MDX, search, series, and interactive explainers can be added later without replacing the Markdown collection.
+
+## Publication branding
+
+The publication name is The AAV Review. The supplied mountain logo is stored unchanged at `public/brand/mountain-logo.jpg`; the header uses a clipped display of its surrounding white space. It also serves as the browser icon. The original AAV News banner is not used because it carries the previous name. The repository is named `the-aav-review` to provide the branded GitHub Pages path.

@@ -1,7 +1,7 @@
 export const settings = {
-  title: "Adrian’s Notebook",
+  title: "The AAV Review",
   description:
     "Independent student opinion and analysis on politics, public policy, technology, and culture. By Adrian Vargas.",
   author: "Adrian Vargas",
-  github: "https://github.com/Adrianv0512/aav_blog_site",
+  github: "https://github.com/Adrianv0512/the-aav-review",
 };

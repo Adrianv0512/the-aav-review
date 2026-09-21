@@ -11,7 +11,7 @@ accent: yellow
 
 Students have a stake in the decisions being made around them: in public policy, in the institutions they attend, and in the technologies they use. That stake is a reason to participate in public debate. It is also a reason to take the quality of that participation seriously.
 
-Adrian’s Notebook is built around a straightforward premise: a student perspective can contribute to a conversation without claiming to settle it. The standard is a clear argument, supported by evidence and open to scrutiny.
+The AAV Review is built around a straightforward premise: a student perspective can contribute to a conversation without claiming to settle it. The standard is a clear argument, supported by evidence and open to scrutiny.
 
 ## Perspective is a starting point
 

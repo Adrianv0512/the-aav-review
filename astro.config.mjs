@@ -3,7 +3,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://adrianv0512.github.io",
-  base: "/aav_blog_site",
+  base: "/the-aav-review",
   trailingSlash: "always",
   output: "static",
   integrations: [sitemap()],

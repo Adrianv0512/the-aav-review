@@ -1,16 +1,20 @@
 ---
+import { settings } from "../settings";
 import { url } from "../utils/urls";
 const path = Astro.url.pathname;
 ---
 
 <header class="site-header wrap">
-  <a class="wordmark" href={url()} aria-label="Adrian’s Notebook — home">
-    <span class="brand-mark" aria-hidden="true">
-      AN
+  <a class="wordmark" href={url()} aria-label={`${settings.title} — home`}>
+    <span class="brand-logo" aria-hidden="true">
+      <img
+        src={url("brand/mountain-logo.jpg")}
+        alt=""
+        width="600"
+        height="600"
+      />
     </span>
-    <span>
-      Adrian’s Notebook<span class="brand-dot">.</span>
-    </span>
+    <span>{settings.title}</span>
   </a>
   <nav aria-label="Main navigation">
     <a
