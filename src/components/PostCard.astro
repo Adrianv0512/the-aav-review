@@ -1,6 +1,6 @@
 ---
 import type { Post } from "../utils/posts";
-import { readingTime, formatDate } from "../utils/posts";
+import { postReadingTime, formatDate } from "../utils/posts";
 import { url } from "../utils/urls";
 import TopicIcon from "./TopicIcon.astro";
 interface Props {
@@ -19,9 +19,9 @@ const { data } = post;
   <a class="card-link" href={url(`writing/${post.id}/`)}>
     <div class="card-kicker">
       <span class="category-icon">
-        <TopicIcon topic={data.tags[0]} />
+        <TopicIcon topic={data.category} />
       </span>
-      <span>{data.tags[0]}</span>
+      <span>{data.category}</span>
       <span class="content-type">Opinion</span>
     </div>
     {data.illustration && (
@@ -42,7 +42,7 @@ const { data } = post;
         {formatDate(data.publishedDate)}
       </time>
       <span aria-hidden="true">/</span>
-      <span>{readingTime(post.body)}</span>
+      <span>{postReadingTime(post)}</span>
     </div>
     <div class="card-bottom">
       <span>

@@ -5,6 +5,10 @@ import TopicIcon from "../components/TopicIcon.astro";
 import { getPosts, allTags } from "../utils/posts";
 import { url, tagSlug } from "../utils/urls";
 const posts = await getPosts();
+const featuredPost = posts.find((post) => post.data.featured);
+const frontPagePosts = featuredPost
+  ? [featuredPost, ...posts.filter((post) => post.id !== featuredPost.id)]
+  : posts;
 const tags = allTags(posts);
 ---
 
@@ -47,7 +51,7 @@ const tags = allTags(posts);
         <div
           class:list={["front-page", { "single-story": posts.length === 1 }]}
         >
-          {posts.slice(0, 3).map((post, index) => (
+          {frontPagePosts.slice(0, 3).map((post, index) => (
             <PostCard post={post} lead={index === 0} />
           ))}
         </div>

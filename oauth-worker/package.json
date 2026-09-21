@@ -1,0 +1,16 @@
+{
+  "name": "the-aav-review-cms-auth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260921.1",
+    "typescript": "7.0.2",
+    "wrangler": "4.136.1"
+  }
+}

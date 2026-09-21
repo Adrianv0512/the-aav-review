@@ -8,13 +8,20 @@ export async function getPosts(): Promise<Post[]> {
       a.id.localeCompare(b.id),
   );
 }
-export function readingTime(body = ""): string {
+
+export function readingTime(body = "", override?: number): string {
+  if (override !== undefined) return `${override} min read`;
+
   const text = body
     .replace(/```[\s\S]*?```/g, "")
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
     .replace(/<[^>]+>/g, "");
   return `${Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 220))} min read`;
+}
+
+export function postReadingTime(post: Post): string {
+  return readingTime(post.body, post.data.readingTimeOverride);
 }
 export function formatDate(date: Date): string {
   return new Intl.DateTimeFormat("en-US", {

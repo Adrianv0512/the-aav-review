@@ -2,6 +2,7 @@
 title: "Technology should serve the work"
 description: "Evaluating the tools we use by their contribution to learning, attention, and meaningful work."
 publishedDate: 2026-09-18
+category: Technology
 tags: [Technology, Campus]
 draft: false
 demo: true

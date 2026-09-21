@@ -2,6 +2,7 @@
 title: "Your article title"
 description: "A one-sentence description for readers and search engines."
 publishedDate: 2026-09-20
+category: Politics
 tags:
   - Miscellaneous
 draft: true

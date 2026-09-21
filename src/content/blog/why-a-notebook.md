@@ -2,6 +2,7 @@
 title: "The case for independent student commentary"
 description: "Why student perspectives belong in public debate—and what responsible commentary requires."
 publishedDate: 2026-09-20
+category: Campus
 tags: [Campus, Culture]
 draft: false
 featured: true

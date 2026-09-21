@@ -2,7 +2,8 @@
 title: "Draft visibility check"
 description: "An unpublished example that must not appear in production."
 publishedDate: 2026-09-21
-tags: [DraftOnly]
+category: Campus
+tags: [Campus]
 draft: true
 ---
 

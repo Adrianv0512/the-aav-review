@@ -1,0 +1,143 @@
+backend:
+  name: github
+  repo: Adrianv0512/the-aav-review
+  branch: main
+  base_url: https://the-aav-review-cms-auth.the-aav-review-cms-auth.workers.dev
+  auth_endpoint: /auth
+  site_domain: adrianv0512.github.io
+  commit_messages:
+    create: 'Create article "{{slug}}"'
+    update: 'Update article "{{slug}}"'
+    delete: 'Delete article "{{slug}}"'
+    uploadMedia: 'Upload media "{{path}}"'
+    deleteMedia: 'Delete media "{{path}}"'
+
+publish_mode: simple
+local_backend: true
+site_url: https://adrianv0512.github.io/the-aav-review/
+display_url: https://adrianv0512.github.io/the-aav-review/
+logo:
+  src: https://adrianv0512.github.io/the-aav-review/brand/mountain-logo.jpg
+  show_in_header: true
+show_preview_links: false
+
+media_folder: public/images/uploads
+public_folder: /the-aav-review/images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: src/content/blog
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: "writing/{{slug}}/"
+    summary: "{{draft | ternary('Draft', 'Published')}} · {{title}}"
+    sortable_fields: [publishedDate, title, commit_date]
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+      - label: Published
+        field: draft
+        pattern: false
+      - label: Featured
+        field: featured
+        pattern: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description / dek
+        name: description
+        widget: text
+        hint: A concise description used on article cards and in search metadata.
+      - label: Primary section
+        name: category
+        widget: select
+        options: [Politics, Technology, Campus, Culture, Media]
+        hint: Controls the section label and icon shown on article cards.
+      - label: Tags
+        name: tags
+        widget: select
+        multiple: true
+        min: 1
+        options: [Politics, Public Policy, Technology, Campus, Culture, Media]
+        hint: Choose one or more topics. Edit this option list to expand the taxonomy.
+      - label: Publication date
+        name: publishedDate
+        widget: datetime
+        default: "{{now}}"
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+        picker_utc: true
+      - label: Updated date
+        name: updatedDate
+        widget: datetime
+        required: false
+        default: ""
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+        picker_utc: true
+        hint: Set this only for a material correction or update.
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: true
+        hint: Keep this on while working. Turn it off to make the article public after the next successful deployment.
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+        hint: The newest featured article becomes the lead story. If none are featured, the newest article leads.
+      - label: Reading time override (optional)
+        name: readingTimeOverride
+        widget: number
+        required: false
+        value_type: int
+        min: 1
+        hint: Leave blank to calculate automatically from the article body at 220 words per minute.
+      - label: Accent color
+        name: accent
+        widget: select
+        options: [blue, yellow, red, green]
+        default: blue
+      - label: Author override
+        name: author
+        widget: string
+        required: false
+        hint: Leave blank to use Adrian Vargas from the global site settings.
+      - label: Illustration path
+        name: illustration
+        widget: string
+        required: false
+        hint: Optional path under public, without the /the-aav-review prefix (for example images/uploads/photo.jpg).
+      - label: Canonical URL
+        name: canonicalURL
+        widget: string
+        required: false
+        hint: Optional absolute URL when this article was first published elsewhere.
+      - label: Social image
+        name: socialImage
+        widget: string
+        required: false
+        hint: Optional absolute URL or path under public, without the project prefix.
+      - label: Demo content
+        name: demo
+        widget: boolean
+        required: false
+        default: false
+        hint: Existing sample articles use this notice. Leave off for original writing.
+      - label: Body
+        name: body
+        widget: markdown

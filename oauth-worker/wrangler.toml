@@ -1,0 +1,14 @@
+# Based on the Cloudflare Worker template linked from Decap's current docs:
+# https://github.com/sterlingwes/decap-proxy/tree/9adde7c898ed4675f414f50334c321d6c87751ed
+name = "the-aav-review-cms-auth"
+main = "src/index.ts"
+compatibility_date = "2026-09-21"
+
+[vars]
+CMS_ORIGIN = "https://adrianv0512.github.io"
+CMS_SITE_DOMAIN = "adrianv0512.github.io"
+GITHUB_REPO_PRIVATE = "0"
+
+# GITHUB_OAUTH_ID and GITHUB_OAUTH_SECRET must be added with:
+# npx wrangler secret put GITHUB_OAUTH_ID
+# npx wrangler secret put GITHUB_OAUTH_SECRET

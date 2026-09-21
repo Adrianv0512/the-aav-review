@@ -2,6 +2,7 @@
 title: "The questions that should precede an opinion"
 description: "How definitions, evidence, and values shape a more useful political argument."
 publishedDate: 2026-09-16
+category: Politics
 tags: [Politics, Media]
 draft: false
 demo: true

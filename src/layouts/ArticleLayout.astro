@@ -2,7 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import TagPill from "../components/TagPill.astro";
-import { type Post, getPosts, formatDate, readingTime } from "../utils/posts";
+import { type Post, getPosts, formatDate, postReadingTime } from "../utils/posts";
 import { settings } from "../settings";
 import { url } from "../utils/urls";
 import "../styles/article.css";
@@ -41,7 +41,7 @@ const related = (await getPosts())
           {formatDate(data.publishedDate)}
         </time>
         <span aria-hidden="true">·</span>
-        <span>{readingTime(post.body)}</span>
+        <span>{postReadingTime(post)}</span>
       </div>
       {data.updatedDate && (
         <p class="updated-date">
