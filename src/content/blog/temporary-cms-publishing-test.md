@@ -1,14 +1,15 @@
 ---
 title: Temporary CMS Publishing Test
-description: A temporary article used to verify the production publishing workflow.
+description: An edited temporary article used to verify the production publishing workflow.
 category: Politics
 tags:
   - Politics
   - Public Policy
 publishedDate: 2026-09-21
 updatedDate: ""
-draft: true
+draft: false
 featured: false
+readingTimeOverride: 7
 accent: blue
 demo: false
 ---
