@@ -1,12 +1,11 @@
 ---
-title: "What makes a tool worth keeping?"
-description: "A few questions about the technology we invite into our everyday lives."
+title: "Technology should serve the work"
+description: "Evaluating the tools we use by their contribution to learning, attention, and meaningful work."
 publishedDate: 2026-09-18
 tags: [Technology, Campus]
 draft: false
 demo: true
 accent: green
-illustration: "/illustrations/laptop.svg"
 ---
 
 A useful tool ought to make room for the thing you wanted to do. That sounds simple until choosing, arranging, and maintaining the tool becomes its own project.

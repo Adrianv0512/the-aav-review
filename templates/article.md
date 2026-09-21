@@ -7,7 +7,6 @@ tags:
 draft: true
 featured: false
 accent: blue
-illustration: "/illustrations/notebook.svg"
 ---
 
 Start with the question or idea that brought you here.

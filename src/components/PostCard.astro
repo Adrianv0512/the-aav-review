@@ -2,49 +2,55 @@
 import type { Post } from "../utils/posts";
 import { readingTime, formatDate } from "../utils/posts";
 import { url } from "../utils/urls";
+import TopicIcon from "./TopicIcon.astro";
 interface Props {
   post: Post;
   index?: number;
   headingLevel?: "h2" | "h3";
+  lead?: boolean;
 }
-const { post, index = 0, headingLevel: Heading = "h3" } = Astro.props;
+const { post, headingLevel: Heading = "h3", lead = false } = Astro.props;
 const { data } = post;
 ---
 
-<article class:list={["post-card", `accent-${data.accent}`]}>
+<article
+  class:list={["post-card", `accent-${data.accent}`, { "lead-story": lead }]}
+>
   <a class="card-link" href={url(`writing/${post.id}/`)}>
-    <div class="card-art">
-      <span class="card-category">{data.tags[0]}</span>
-      {data.illustration && (
-        <img
-          src={url(data.illustration)}
-          width="320"
-          height="260"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-        />
-      )}
-      <span class="card-number" aria-hidden="true">
-        0{index + 1}
+    <div class="card-kicker">
+      <span class="category-icon">
+        <TopicIcon topic={data.tags[0]} />
       </span>
+      <span>{data.tags[0]}</span>
+      <span class="content-type">Opinion</span>
     </div>
-    <div class="card-copy">
-      <div class="post-meta">
-        <time datetime={data.publishedDate.toISOString()}>
-          {formatDate(data.publishedDate)}
-        </time>
-        <span>·</span>
-        <span>{readingTime(post.body)}</span>
-      </div>
-      <Heading class="card-title">{data.title}</Heading>
-      <p>{data.description}</p>
-      <div class="card-bottom">
-        <span>{data.demo ? "Sample entry" : "Read the entry"}</span>
-        <span class="circle-arrow" aria-hidden="true">
-          ↗
-        </span>
-      </div>
+    {data.illustration && (
+      <img
+        class="card-image"
+        src={url(data.illustration)}
+        width="640"
+        height="360"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
+    )}
+    <Heading class="card-title">{data.title}</Heading>
+    <p class="card-description">{data.description}</p>
+    <div class="post-meta">
+      <time datetime={data.publishedDate.toISOString()}>
+        {formatDate(data.publishedDate)}
+      </time>
+      <span aria-hidden="true">/</span>
+      <span>{readingTime(post.body)}</span>
+    </div>
+    <div class="card-bottom">
+      <span>
+        {data.demo ? "Sample essay" : `By ${data.author || "Adrian Vargas"}`}
+      </span>
+      <span class="read-article">
+        Read article <span aria-hidden="true">→</span>
+      </span>
     </div>
   </a>
 </article>

@@ -5,30 +5,9 @@ const path = Astro.url.pathname;
 
 <header class="site-header wrap">
   <a class="wordmark" href={url()} aria-label="Adrian’s Notebook — home">
-    <svg
-      viewBox="0 0 36 40"
-      width="29"
-      height="34"
-      fill="none"
-      aria-hidden="true"
-    >
-      <rect
-        x="6"
-        y="3"
-        width="25"
-        height="33"
-        rx="3"
-        fill="#f5cb55"
-        stroke="currentColor"
-        stroke-width="2"
-      />
-      <path
-        d="M12 3v33M3 10h6M3 19h6M3 28h6M17 12h9M17 18h7"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-      />
-    </svg>
+    <span class="brand-mark" aria-hidden="true">
+      AN
+    </span>
     <span>
       Adrian’s Notebook<span class="brand-dot">.</span>
     </span>
@@ -40,7 +19,7 @@ const path = Astro.url.pathname;
         path.includes("/writing") || path.includes("/tags") ? "page" : undefined
       }
     >
-      Writing
+      Articles
     </a>
     <a
       href={url("about/")}

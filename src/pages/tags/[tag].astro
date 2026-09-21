@@ -21,26 +21,24 @@ const posts = allPosts.filter((post) => post.data.tags.includes(tag));
 >
   <div class="wrap">
     <header class="page-intro">
-      <p class="eyebrow">A thread in the notebook</p>
+      <p class="eyebrow">Subject archive</p>
       <h1>
         {tag}
         <span style="color:var(--blue)">.</span>
       </h1>
-      <p class="lead">
-        A few thoughts on {tag.toLowerCase()}. Always room for another
-        perspective.
-      </p>
+      <p class="lead">Opinion and analysis on {tag.toLowerCase()}.</p>
     </header>
     <nav class="archive-filters tag-list" aria-label="Filter writing by topic">
       <a class="tag-pill" href={url("writing/")}>
-        Everything
+        All subjects
       </a>
       {allTags(allPosts).map((item) => (
         <TagPill tag={item} active={item === tag} />
       ))}
     </nav>
     <p class="entry-count">
-      {posts.length} {posts.length === 1 ? "entry" : "entries"} · Newest first
+      {posts.length} {posts.length === 1 ? "article" : "articles"} · Newest
+      first
     </p>
     <div class="post-grid">
       {posts.map((post, index) => (

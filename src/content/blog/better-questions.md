@@ -1,12 +1,11 @@
 ---
-title: "Before an opinion, a better question"
-description: "A little less certainty, a little more listening, and a closer look at what we actually mean."
+title: "The questions that should precede an opinion"
+description: "How definitions, evidence, and values shape a more useful political argument."
 publishedDate: 2026-09-16
 tags: [Politics, Media]
 draft: false
 demo: true
 accent: blue
-illustration: "/illustrations/speech.svg"
 ---
 
 Consider a conversation in which two people agree that a policy should be “fair.” It sounds like common ground. But one might mean treating everyone identically, while the other means accounting for different starting points.

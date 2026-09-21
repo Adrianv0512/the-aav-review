@@ -1,434 +1,385 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
-import TagPill from "../components/TagPill.astro";
-import Doodle from "../components/Doodle.astro";
+import TopicIcon from "../components/TopicIcon.astro";
 import { getPosts, allTags } from "../utils/posts";
-import { url } from "../utils/urls";
+import { url, tagSlug } from "../utils/urls";
 const posts = await getPosts();
 const tags = allTags(posts);
 ---
 
 <BaseLayout>
   <div class="wrap">
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-copy">
-        <p class="eyebrow">
-          <span class="little-star" aria-hidden="true">
-            ✳
-          </span>{" "}
-          A personal corner of the internet
-        </p>
-        <h1 id="hero-heading">
-          A few thoughts.
-          <br />A little{" "}
-          <span class="curiosity">
-            curiosity.
-            <svg
-              viewBox="0 0 420 20"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 13Q175 0 414 9M25 19Q205 8 383 16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="4"
-                stroke-linecap="round"
-              />
-            </svg>
-          </span>
-        </h1>
-        <p class="hero-description">
-          Politics, technology, culture, and other
-          <br class="desktop-break" /> things I’m thinking about.
-        </p>
-        <div class="hero-actions">
-          <a class="button" href={url("writing/")}>
-            Start reading <span aria-hidden="true">↗</span>
-          </a>
-          <span class="byline">A notebook by Adrian Vargas</span>
-        </div>
-      </div>
-      <div class="hero-art">
-        <Doodle name="hero-notebook" />
-        <span class="hand-note">
-          a work in progress,
+    <section class="publication-intro" aria-labelledby="publication-heading">
+      <div>
+        <p class="eyebrow">Independent student commentary</p>
+        <h1 id="publication-heading">
+          Current events.
           <br />
-          just like my opinions.
-        </span>
+          <span>Considered perspectives.</span>
+        </h1>
+      </div>
+      <div class="publication-deck">
+        <p>
+          Opinion and analysis on politics, technology, and culture. Written by
+          Adrian Vargas.
+        </p>
+        <a class="text-link" href={url("about/")}>
+          About the publication <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
-    <div class="editorial-rule">
-      <span>Independent thoughts. Open tabs. Unfinished questions.</span>
-      <span aria-hidden="true">
-        EST. 2026 <span class="rule-star">✳</span>
+    <div class="edition-line">
+      <span>
+        Adrian’s Notebook <span aria-hidden="true">/</span> Opinion &amp;
+        analysis
       </span>
+      <span>Est. 2026</span>
     </div>
     <section class="latest" aria-labelledby="latest-heading">
       <div class="section-heading">
-        <h2 id="latest-heading">
-          Fresh from the notebook<span class="heading-dot">.</span>
-        </h2>
+        <h2 id="latest-heading">Latest commentary</h2>
         <a class="text-link" href={url("writing/")}>
-          All writing <span aria-hidden="true">↗</span>
+          View archive <span aria-hidden="true">→</span>
         </a>
       </div>
       {posts.length ? (
-        <div class="post-grid">
+        <div
+          class:list={["front-page", { "single-story": posts.length === 1 }]}
+        >
           {posts.slice(0, 3).map((post, index) => (
-            <PostCard post={post} index={index} />
+            <PostCard post={post} lead={index === 0} />
           ))}
         </div>
       ) : (
         <p class="empty-state">
-          A fresh page. The first entry will be here soon.
+          Articles will appear here as they are published.
         </p>
       )}
     </section>
     {tags.length > 0 && (
-      <section class="topics" aria-labelledby="topics-heading">
-        <div>
-          <p class="eyebrow">Following my curiosity</p>
-          <h2 id="topics-heading">
-            Things I’m <br />
-            thinking about
-          </h2>
+      <section class="sections" aria-labelledby="sections-heading">
+        <div class="section-heading">
+          <h2 id="sections-heading">Sections</h2>
+          <span class="section-caption">Explore by subject</span>
         </div>
-        <div class="topic-links">
+        <div class="section-grid">
           {tags.map((tag) => (
-            <TagPill tag={tag} />
+            <a href={url(`tags/${tagSlug(tag)}/`)}>
+              <TopicIcon topic={tag} />
+              <span>{tag}</span>
+              <span class="section-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
           ))}
-          <span class="topic-note">
-            No particular order. Plenty of overlap.
-          </span>
         </div>
-        <span class="topic-spark" aria-hidden="true">
-          ✳
-        </span>
       </section>
     )}
-    <section class="closing lined-note">
-      <Doodle name="pencil" />
+    <section class="editorial-note">
       <div>
-        <h2>A notebook, not a newsfeed.</h2>
+        <p class="eyebrow">The editorial approach</p>
+        <h2>Evidence. Context. Perspective.</h2>
+      </div>
+      <div>
         <p>
-          No hot-take quota. No endless scroll. Just a place to slow down,
-          <br class="desktop-break" /> follow a thought, and see where it goes.
+          Clear arguments, direct sources, and a distinction between reporting
+          and opinion. A student perspective on the decisions and developments
+          shaping public life.
         </p>
-        <a class="text-link" href={url("about/")}>
-          A little more about me <span aria-hidden="true">↗</span>
+        <a class="text-link" href={url("about/#editorial-standards")}>
+          Editorial standards <span aria-hidden="true">→</span>
         </a>
       </div>
-      <span class="closing-star" aria-hidden="true">
-        ✶
-      </span>
     </section>
   </div>
 </BaseLayout>
 <style>
-  .hero {
+  .publication-intro {
     display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    align-items: center;
-    gap: 25px;
-    padding: 66px 0 56px;
+    grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+    gap: 55px;
+    align-items: end;
+    padding: 55px 0 43px;
   }
-  .hero .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 26px;
-    font-size: 0.7rem;
+  .publication-intro .eyebrow {
+    margin-bottom: 22px;
   }
-  .little-star {
-    font-size: 24px;
-    color: var(--blue);
-    line-height: 1;
-  }
-  .hero h1 {
-    font-size: clamp(3.5rem, 5.9vw, 5.4rem);
-    line-height: 1.055;
+  .publication-intro h1 {
+    font-size: clamp(2.8rem, 4.55vw, 4.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.06em;
     font-weight: 650;
-    letter-spacing: -0.065em;
-    margin-bottom: 32px;
-  }
-  .curiosity {
-    position: relative;
-    color: var(--blue);
-    white-space: nowrap;
-  }
-  .curiosity svg {
-    position: absolute;
-    left: 0;
-    bottom: -13px;
-    width: 100%;
-    height: 16px;
-    color: var(--blue);
-  }
-  .hero-description {
-    font-size: 1.08rem;
-    line-height: 1.75;
-    color: var(--muted);
-    margin-bottom: 27px;
-  }
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .byline {
-    font-size: 0.72rem;
-    color: var(--muted);
-  }
-  .hero-art {
-    position: relative;
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-  }
-  .hero-art :global(.doodle) {
-    width: 100%;
-    max-width: 430px;
-    transform: rotate(-3deg);
-  }
-  .hand-note {
-    position: absolute;
-    right: 15px;
-    bottom: -5px;
-    font-family: var(--serif);
-    font-size: 0.85rem;
-    font-style: italic;
-    line-height: 1.6;
-    transform: rotate(-7deg);
-    color: var(--muted);
-  }
-  .editorial-rule {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 12px 0;
-    font-size: 0.72rem;
-    color: var(--muted);
-  }
-  .editorial-rule > span:last-child {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-  }
-  .rule-star {
-    font-size: 22px;
-    color: var(--ink);
-  }
-  .latest {
-    padding-top: 47px;
-  }
-  .latest h2 {
-    font-size: 1.95rem;
-  }
-  .heading-dot {
-    color: var(--blue);
-  }
-  .topics {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1.45fr;
-    gap: 50px;
-    align-items: center;
-    padding: 58px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .topics .eyebrow {
-    font-size: 0.68rem;
-    margin-bottom: 12px;
-  }
-  .topics h2 {
-    font-size: 2rem;
     margin: 0;
   }
-  .topic-links {
+  .publication-intro h1 span {
+    color: var(--blue);
+  }
+  .publication-deck {
+    border-left: 1px solid var(--line);
+    padding-left: 30px;
+  }
+  .publication-deck p {
+    font-family: var(--serif);
+    font-size: 1rem;
+    line-height: 1.85;
+    margin-bottom: 12px;
+  }
+  .publication-deck .text-link {
+    font-size: 0.82rem;
+  }
+  .edition-line {
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding: 11px 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding-right: 50px;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
   }
-  .topic-links :global(.tag-pill):nth-child(3n + 1) {
-    background: var(--blue-light);
+  .edition-line > span:first-child {
+    display: flex;
+    gap: 16px;
   }
-  .topic-links :global(.tag-pill):nth-child(3n + 2) {
+  .edition-line > span:last-child {
+    color: var(--muted);
+  }
+  .latest {
+    padding-top: 31px;
+  }
+  .latest .section-heading h2,
+  .sections .section-heading h2 {
+    font-size: 1.35rem;
+    letter-spacing: -0.035em;
+  }
+  .front-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    column-gap: 36px;
+    row-gap: 0;
+  }
+  .front-page :global(.lead-story) {
+    grid-row: span 2;
+    border-right: 1px solid var(--line);
+    padding-right: 36px;
+  }
+  .front-page :global(.post-card:not(.lead-story)) {
+    padding: 25px 0;
+  }
+  .front-page :global(.post-card:nth-child(2)) {
+    padding-top: 0;
+  }
+  .front-page :global(.post-card:nth-child(3)) {
+    border-top: 1px solid var(--line);
+    padding-bottom: 0;
+  }
+  .front-page :global(.lead-story .card-title) {
+    font-size: clamp(2rem, 3.1vw, 2.9rem);
+    max-width: 550px;
+    margin: 26px 0 20px;
+    line-height: 1.12;
+  }
+  .front-page :global(.lead-story .card-description) {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+  .front-page :global(.lead-story .card-kicker) {
+    padding-top: 8px;
+  }
+  .front-page :global(.lead-story .category-icon) {
+    width: 44px;
+    height: 44px;
     background: var(--yellow-light);
   }
-  .topic-links :global(.tag-pill):nth-child(3n) {
-    background: var(--red-light);
+  .front-page :global(.post-card:not(.lead-story) .card-title) {
+    font-size: 1.6rem;
+    margin: 13px 0 10px;
   }
-  .topic-note {
-    width: 100%;
-    font-size: 0.74rem;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-  .topic-spark {
-    position: absolute;
-    right: 0;
-    top: 70px;
-    font-size: 46px;
-    transform: rotate(15deg);
-    color: var(--green);
-  }
-  .closing {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    padding: 37px;
-    margin-top: 45px;
-    border: 1px solid #c7cbb7;
-    border-radius: 12px;
-  }
-  .closing :global(.doodle) {
-    width: 105px;
-    transform: rotate(-13deg);
-  }
-  .closing h2 {
-    font-size: 1.7rem;
+  .front-page :global(.post-card:not(.lead-story) .card-description) {
     margin-bottom: 14px;
   }
-  .closing p {
-    font-size: 0.9rem;
-    color: #51594b;
-    margin-bottom: 5px;
-    line-height: 1.9;
+  .front-page :global(.post-card:not(.lead-story) .card-bottom) {
+    padding-top: 14px;
   }
-  .closing .text-link {
+  .single-story {
+    grid-template-columns: 1fr;
+  }
+  .single-story :global(.lead-story) {
+    border-right: 0;
+    padding-right: 0;
+  }
+  .sections {
+    padding: 35px 0;
+    margin-top: 40px;
+    border-top: 2px solid var(--ink);
+  }
+  .section-caption {
+    color: var(--muted);
     font-size: 0.8rem;
   }
-  .closing-star {
-    font-size: 47px;
-    color: var(--green);
-    position: absolute;
-    top: 13px;
-    right: 28px;
+  .section-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 28px;
   }
-  @media (max-width: 1000px) {
-    .hero-actions {
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .hero h1 {
-      font-size: clamp(3rem, 6vw, 5rem);
-    }
-    .hand-note {
-      right: 0;
-      bottom: 15px;
-    }
-    .topics {
+  .section-grid a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    font-size: 0.94rem;
+  }
+  .section-grid :global(.topic-icon) {
+    color: var(--muted);
+    width: 20px;
+    height: 20px;
+  }
+  .section-arrow {
+    margin-left: auto;
+    color: var(--muted);
+  }
+  .section-grid a:hover {
+    color: var(--blue);
+  }
+  .editorial-note {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+    background: var(--green-light);
+    border-top: 2px solid var(--ink);
+    padding: 31px 34px;
+    margin-top: 5px;
+  }
+  .editorial-note .eyebrow {
+    font-size: 0.7rem;
+    margin-bottom: 12px;
+  }
+  .editorial-note h2 {
+    font-size: 1.7rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .editorial-note p:not(.eyebrow) {
+    font-size: 0.94rem;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .editorial-note .text-link {
+    font-size: 0.8rem;
+    margin-top: 7px;
+  }
+  @media (max-width: 900px) {
+    .publication-intro {
       gap: 25px;
     }
-    .hero {
-      padding-top: 50px;
+    .publication-intro h1 {
+      font-size: 2.8rem;
+    }
+    .publication-deck {
+      padding-left: 22px;
+    }
+    .publication-deck p {
+      font-size: 0.9rem;
+    }
+    .front-page {
+      column-gap: 25px;
+    }
+    .front-page :global(.lead-story) {
+      padding-right: 25px;
+    }
+    .editorial-note {
+      gap: 25px;
     }
   }
   @media (max-width: 650px) {
-    .hero {
+    .publication-intro {
       grid-template-columns: 1fr;
-      padding: 37px 0 25px;
-      gap: 12px;
+      padding: 34px 0 27px;
+      gap: 24px;
     }
-    .hero .eyebrow {
-      font-size: 0.59rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 22px;
+    .publication-intro h1 {
+      font-size: clamp(2.3rem, 9.2vw, 3.3rem);
     }
-    .hero h1 {
-      font-size: clamp(2.8rem, 12vw, 4.5rem);
-      margin-bottom: 28px;
+    .publication-intro .eyebrow {
+      font-size: 0.68rem;
+      margin-bottom: 18px;
     }
-    .hero-description {
+    .publication-deck {
+      border: 0;
+      padding: 0;
+    }
+    .publication-deck p {
       font-size: 1rem;
-      margin-bottom: 24px;
+      margin: 0;
+      max-width: 440px;
     }
-    .hero-art {
-      height: 240px;
-      margin-top: 10px;
+    .edition-line {
+      font-size: 0.62rem;
+      gap: 10px;
     }
-    .hero-art :global(.doodle) {
-      width: 275px;
-      height: 250px;
+    .edition-line > span:first-child {
+      gap: 9px;
     }
-    .hand-note {
-      bottom: 0;
-      font-size: 0.72rem;
-      right: 5px;
+    .edition-line > span:last-child {
+      display: none;
     }
-    .byline {
+    .front-page {
+      grid-template-columns: 1fr;
+    }
+    .front-page :global(.lead-story) {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 0 0 25px;
+      margin-bottom: 25px;
+      grid-row: auto;
+    }
+    .front-page :global(.lead-story .card-title) {
+      font-size: 2rem;
+      margin-top: 18px;
+    }
+    .front-page :global(.post-card:not(.lead-story) .card-title) {
+      font-size: 1.65rem;
+    }
+    .front-page :global(.lead-story .card-description) {
+      font-size: 1rem;
+    }
+    .section-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 18px;
+    }
+    .section-grid a {
+      gap: 8px;
+      font-size: 0.82rem;
+    }
+    .section-grid :global(.topic-icon) {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .editorial-note {
+      grid-template-columns: 1fr;
+      padding: 25px 22px;
+      gap: 18px;
+    }
+    .editorial-note h2 {
+      font-size: 1.5rem;
+    }
+    .section-caption {
       font-size: 0.7rem;
     }
-    .hero-actions {
-      gap: 15px;
-    }
-    .editorial-rule {
-      font-size: 0.65rem;
-      padding-block: 13px;
-    }
-    .editorial-rule > span:last-child {
-      display: none;
+    .sections {
+      margin-top: 30px;
+      padding: 26px 0;
     }
     .latest {
-      padding-top: 35px;
-    }
-    .latest h2 {
-      font-size: 1.55rem;
-      max-width: 210px;
-    }
-    .topics {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 38px 0;
-    }
-    .topics h2 {
-      font-size: 1.8rem;
-    }
-    .topics h2 br {
-      display: none;
-    }
-    .topic-links {
-      padding-right: 0;
-    }
-    .topic-spark {
-      top: 22px;
-      font-size: 35px;
-    }
-    .closing {
-      padding: 30px 23px;
-      gap: 12px;
-      align-items: flex-start;
-      margin-top: 30px;
-    }
-    .closing :global(.doodle) {
-      display: none;
-    }
-    .closing h2 {
-      font-size: 1.4rem;
-      max-width: 230px;
-    }
-    .closing p {
-      font-size: 0.85rem;
-    }
-    .closing-star {
-      font-size: 29px;
-      right: 14px;
-      top: 10px;
-    }
-    .desktop-break {
-      display: none;
+      padding-top: 24px;
     }
   }
 </style>

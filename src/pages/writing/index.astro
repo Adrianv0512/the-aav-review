@@ -8,31 +8,32 @@ const posts = await getPosts();
 ---
 
 <BaseLayout
-  title="All writing"
-  description="Notes, essays, and unfinished questions from Adrian’s Notebook."
+  title="Articles & analysis"
+  description="Independent student commentary on politics, technology, and culture by Adrian Vargas."
 >
   <div class="wrap">
     <header class="page-intro">
-      <p class="eyebrow">The collected scribbles</p>
+      <p class="eyebrow">The archive</p>
       <h1>
-        All writing<span class="blue-dot">.</span>
+        Articles & analysis<span class="blue-dot">.</span>
       </h1>
       <p class="lead">
-        A place for ideas that need a little more room.
+        Essays and commentary on current events.
         <br />
-        Browse the notebook, or follow a thread.
+        Browse the full archive or select a subject.
       </p>
     </header>
     <nav class="archive-filters tag-list" aria-label="Filter writing by topic">
       <a class="tag-pill active" href={url("writing/")} aria-current="page">
-        Everything
+        All subjects
       </a>
       {allTags(posts).map((tag) => (
         <TagPill tag={tag} />
       ))}
     </nav>
     <p class="entry-count">
-      {posts.length} {posts.length === 1 ? "entry" : "entries"} · Newest first
+      {posts.length} {posts.length === 1 ? "article" : "articles"} · Newest
+      first
     </p>
     {posts.length ? (
       <div class="post-grid">
@@ -41,7 +42,9 @@ const posts = await getPosts();
         ))}
       </div>
     ) : (
-      <p class="empty-state">The notebook is open. First entry coming soon.</p>
+      <p class="empty-state">
+        Articles will appear here as they are published.
+      </p>
     )}
   </div>
 </BaseLayout>

@@ -1,6 +1,6 @@
 # Adrian’s Notebook
 
-A lightweight, static editorial blog built with Astro, TypeScript, Markdown, and plain CSS. Original SVG doodles, self-hosted Space Grotesk and Literata fonts, no analytics, no database, and no browser JavaScript required for navigation or reading.
+A lightweight, static editorial blog built with Astro, TypeScript, Markdown, and plain CSS. Restrained editorial topic icons, self-hosted Space Grotesk and Literata fonts, no analytics, no database, and no browser JavaScript required for navigation or reading.
 
 ## Run locally
 
@@ -33,7 +33,6 @@ tags:
   - Media
 draft: false
 accent: blue
-illustration: "/illustrations/podium.svg"
 ---
 ```
 
@@ -51,7 +50,7 @@ Use direct links to primary sources where possible. Separate factual claims from
 
 ## Replace the demo content
 
-Three published sample entries have `demo: true`, producing a visible sample label and article notice. Delete or replace these entries before your public launch. Keep `draft-example.md` as a hidden authoring example or delete it. Replace the marked starter biography in `src/pages/about.astro`. For original writing, omit `demo` or set it to `false`.
+Three published sample entries have `demo: true`, producing a visible sample label and article notice. Delete or replace these entries before your public launch. Keep `draft-example.md` as a hidden authoring example or delete it. The About page identifies Adrian as a student and explains the publication’s editorial approach; edit it in `src/pages/about.astro`. For original writing, omit `demo` or set it to `false`.
 
 ## Publish with GitHub Pages
 
@@ -83,7 +82,7 @@ The workflow uses the current [official Astro Pages deployment approach](https:/
 | Hostname and repository prefix         | `astro.config.mjs`                                     |
 | Content schema                         | `src/content.config.ts`                                |
 
-SVG illustrations live in `public/illustrations/`: notebook, hero-notebook, pencil, laptop, speech, podium, lightbulb, loose-page, and ballot. They are original project assets. Decorative uses have empty alternative text. Social preview images are optional: set `socialImage` to an absolute URL or a local public path to a PNG/JPEG and the SEO component will generate its metadata.
+Subject icons live in `src/components/TopicIcon.astro` and are decorative. The homepage uses a lead article and recent commentary; the archive uses typography-led article listings. Optional article illustrations can still be added through the `illustration` field, using your own public assets. Social preview images are optional: set `socialImage` to an absolute URL or a local public path to a PNG/JPEG and the SEO component will generate its metadata.
 
 ## Custom domain later
 

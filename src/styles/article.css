@@ -3,7 +3,9 @@
   margin: 0 auto;
 }
 .article-header {
-  padding-top: 48px;
+  padding-top: 40px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--ink);
 }
 .back-link {
   display: inline-flex;
@@ -49,8 +51,8 @@
   justify-content: center;
   align-items: center;
   background: var(--accent-light);
-  border: 1.5px solid var(--ink);
-  border-radius: 15px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
   height: 235px;
   margin: 35px 0 40px;
 }
@@ -177,12 +179,6 @@
   border-top: 1px solid var(--line);
   margin-top: 45px;
   padding-top: 25px;
-}
-.end-mark {
-  text-align: center;
-  color: var(--accent);
-  font-size: 32px;
-  margin: 25px 0;
 }
 .related {
   padding-top: 35px;
